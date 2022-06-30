@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32526.322
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Farsica.Framework.Test", "Farsica.Framework.Test\Farsica.Framework.Test.csproj", "{157F4BAD-A1B0-4FC3-A945-D8A3D3543942}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{157F4BAD-A1B0-4FC3-A945-D8A3D3543942}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{157F4BAD-A1B0-4FC3-A945-D8A3D3543942}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{157F4BAD-A1B0-4FC3-A945-D8A3D3543942}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{157F4BAD-A1B0-4FC3-A945-D8A3D3543942}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73FE0CD0-8708-41E5-B082-7A64D5166898}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73FE0CD0-8708-41E5-B082-7A64D5166898}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73FE0CD0-8708-41E5-B082-7A64D5166898}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73FE0CD0-8708-41E5-B082-7A64D5166898}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F01C6E8F-5BCA-4A67-86E1-C6CB6D0BC11A}
+	EndGlobalSection
+EndGlobal
