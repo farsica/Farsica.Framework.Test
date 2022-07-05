@@ -25,7 +25,8 @@ public class ChromeFactory : INamedBrowserFactory
         options.AddUserProfilePreference("download.default_directory", this.options.DownloadDirectory);
         options.AddUserProfilePreference("profile.cookie_controls_mode", 0);
         options.SetLoggingPreference(LogType.Browser, LogLevel.All);
-        return new ChromeDriver(driverService, options, TimeSpan.FromSeconds(this.options.DefaultTimeoutSeconds));
+
+		return new ChromeDriver(driverService, options, TimeSpan.FromSeconds(this.options.DefaultTimeoutSeconds));
     }
 
     public BrowserType BrowserType => BrowserType.Chrome;

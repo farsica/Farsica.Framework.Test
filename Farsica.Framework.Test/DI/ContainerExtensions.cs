@@ -4,6 +4,7 @@ using Farsica.Framework.Test.Core.DI.Containers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Serilog;
 
 namespace Farsica.Framework.Test.Core.DI;
 
@@ -43,6 +44,7 @@ public static class ContainerExtensions
         new ConfigureFromConfigurationOptions<T>(config.GetSection("SessionSettings")).Configure(settings);
         return container
             .AddSingleton(config)
-            .AddSingleton(settings);
+            .AddSingleton(settings)
+			.AddLogging(loggingBuilder => loggingBuilder.AddSerilog(dispose: true));
     }
 }
