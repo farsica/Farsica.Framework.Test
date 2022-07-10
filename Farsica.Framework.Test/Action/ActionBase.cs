@@ -3,7 +3,7 @@ using OpenQA.Selenium.Support.UI;
 
 namespace Farsica.Framework.Test.Action
 {
-	public class ActionBase
+	public abstract class ActionBase
 	{
 		internal IWebDriver? Driver { get; set; }
 

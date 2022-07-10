@@ -6,7 +6,7 @@ using Xunit.Abstractions;
 
 namespace Farsica.Framework.Test.Scenario
 {
-	public class ScenarioBase<TScenario, TAction> : IDisposable
+	public abstract class ScenarioBase<TScenario, TAction> : IDisposable
 		where TAction : Action.ActionBase, new()
 	{
 		protected readonly IWebDriver? Driver;
@@ -64,15 +64,6 @@ namespace Farsica.Framework.Test.Scenario
 				Driver?.Close();
 				Driver?.Quit();
 				Driver?.Dispose();
-
-				//var processes = Process.GetProcessesByName("chromedriver.exe");
-				//if (processes is not null)
-				//{
-				//	foreach (var process in processes)
-				//	{
-				//		process.Kill();
-				//	}
-				//}
 			}
 
 			IsDisposed = true;
