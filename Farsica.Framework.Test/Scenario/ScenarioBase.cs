@@ -2,10 +2,12 @@
 using Farsica.Framework.Test.Logger;
 using Microsoft.Extensions.Logging;
 using OpenQA.Selenium;
+using Xunit;
 using Xunit.Abstractions;
 
 namespace Farsica.Framework.Test.Scenario
 {
+	[TestCaseOrderer("Farsica.Framework.Test.Data.TestPriorityOrderer", "Farsica.Framework.Test")]
 	public abstract class ScenarioBase<TScenario, TAction> : IDisposable
 		where TAction : Action.ActionBase, new()
 	{
