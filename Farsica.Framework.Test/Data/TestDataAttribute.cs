@@ -7,9 +7,9 @@ namespace Farsica.Framework.Test.Data
 	[DataDiscoverer("Farsica.Framework.Test.Data.TestDataDiscoverer", "Farsica.Framework.Test")]
 	[AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
 	public sealed class TestDataAttribute<T> : MemberDataAttributeBase
-		where T : TestDataGeneratorBase<T>, new()
+		where T : ITestDataGenerator<T>, new()
 	{
-		private const string methodName = nameof(TestDataGeneratorBase<T>.GetData);
+		private const string methodName = nameof(ITestDataGenerator<T>.GetData);
 
 		public TestDataAttribute(params object[] parameters)
 			: base(methodName, parameters)
@@ -35,7 +35,7 @@ namespace Farsica.Framework.Test.Data
 		public override IEnumerable<object[]>? GetData(MethodInfo testMethod)
 		{
 			var data = new T().GetData();
-			return data;
+			return data.OfType<object[]>();
 
 			//var type = MemberType ?? testMethod.DeclaringType;
 			//Func<object?>? func = GetPropertyAccessor(type) ?? GetFieldAccessor(type) ?? GetMethodAccessor(type);
