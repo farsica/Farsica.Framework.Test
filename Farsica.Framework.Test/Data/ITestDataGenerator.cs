@@ -1,8 +1,10 @@
-﻿namespace Farsica.Framework.Test.Data
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Farsica.Framework.Test.Data
 {
 	public interface ITestDataGenerator<T>
-		where T : ITestDataGenerator<T>, new()
+		where T : IData, new()
 	{
-		IEnumerable<T[]> GetData();
+		IEnumerable<T> GetData();
 	}
 }

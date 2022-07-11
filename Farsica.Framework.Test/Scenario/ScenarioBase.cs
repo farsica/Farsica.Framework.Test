@@ -1,23 +1,27 @@
 ﻿using Farsica.Framework.Test.Core;
+using Farsica.Framework.Test.Data;
 using Farsica.Framework.Test.Logger;
 using Microsoft.Extensions.Logging;
 using OpenQA.Selenium;
 using Xunit;
 using Xunit.Abstractions;
+using Xunit.Sdk;
 
 namespace Farsica.Framework.Test.Scenario
 {
 	[TestCaseOrderer("Farsica.Framework.Test.Data.TestPriorityOrderer", "Farsica.Framework.Test")]
 	public abstract class ScenarioBase<TScenario, TAction> : IDisposable
+		where TScenario : ScenarioBase<TScenario, TAction>, new()
 		where TAction : Action.ActionBase, new()
 	{
-		protected readonly IWebDriver? Driver;
-		protected readonly TAction? Action;
-		protected readonly ILogger<TScenario>? Logger;
+		protected IWebDriver? Driver { get; private set; }
+		protected TAction? Action { get; private set; }
+		//protected ILogger<TScenario>? Logger { get; private set; }
 
 		protected bool IsDisposed { get; set; }
 
-		public ScenarioBase(ITestOutputHelper testOutputHelper)
+		//public ScenarioBase(ITestOutputHelper testOutputHelper)
+		public ScenarioBase()
 		{
 			UiTestSession.Current.Start();
 			Driver = UiTestSession.Current.Resolve<IWebDriver>();
@@ -30,11 +34,24 @@ namespace Farsica.Framework.Test.Scenario
 				Driver = Driver
 			};
 
-			var loggerFactory = LoggerFactory.Create(l =>
-			{
-				l.AddProvider(new XunitLoggerProvider(testOutputHelper));
-			});
-			Logger = loggerFactory.CreateLogger<TScenario>();
+			//var loggerFactory = LoggerFactory.Create(l =>
+			//{
+			//	l.AddProvider(new XunitLoggerProvider(testOutputHelper));
+			//});
+			//Logger = loggerFactory.CreateLogger<TScenario>();
+		}
+
+		public TNestedAction GetNestedAction<TNestedAction>()
+			where TNestedAction : Action.ActionBase, new()
+		{
+			return new TNestedAction { Driver = Driver };
+		}
+
+		public TData GetNestedData<TGenerator, TData>()
+			where TGenerator : ITestDataGenerator<TData>, new()
+			where TData : IData, new()
+		{
+			return new TGenerator().GetData().FirstOrDefault();
 		}
 
 		~ScenarioBase()
