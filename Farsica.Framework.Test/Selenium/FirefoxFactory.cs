@@ -20,7 +20,9 @@ public class FirefoxFactory : INamedBrowserFactory
 
 	public IWebDriver Create()
 	{
+#pragma warning disable CA2000 // Dispose objects before losing scope
 		var driverService = FirefoxDriverService.CreateDefaultService($"{Environment.CurrentDirectory}\\Drivers");
+#pragma warning restore CA2000 // Dispose objects before losing scope
 		var options = new FirefoxOptions();
 		if (this.options.Headless)
 		{

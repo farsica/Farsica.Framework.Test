@@ -13,9 +13,8 @@ namespace Farsica.Framework.Test.Data
 
 		public override IEnumerable<object?[]> GetData(MethodInfo methodUnderTest)
 		{
-			DataSet dataSet = new();
+			using DataSet dataSet = new();
 			IDataAdapter adapter = DataAdapter;
-
 			try
 			{
 				adapter.Fill(dataSet);

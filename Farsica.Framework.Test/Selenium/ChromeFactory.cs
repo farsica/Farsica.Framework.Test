@@ -14,8 +14,10 @@ public class ChromeFactory : INamedBrowserFactory
 
     public IWebDriver Create()
     {
-        var driverService = ChromeDriverService.CreateDefaultService($"{Environment.CurrentDirectory}\\Drivers");
-        var options = new ChromeOptions();
+#pragma warning disable CA2000 // Dispose objects before losing scope
+		var driverService = ChromeDriverService.CreateDefaultService($"{Environment.CurrentDirectory}\\Drivers");
+#pragma warning restore CA2000 // Dispose objects before losing scope
+		var options = new ChromeOptions();
         if (this.options.Headless)
         {
             options.AddArgument("headless");

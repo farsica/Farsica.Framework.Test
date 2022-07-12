@@ -29,7 +29,9 @@ namespace Farsica.Framework.Test.Data
 		}
 
 #pragma warning disable CA1416 // Validate platform compatibility
+#pragma warning disable CA2100 // Review SQL queries for security vulnerabilities
 		protected override IDataAdapter DataAdapter => new OleDbDataAdapter(selectStatement, connectionString);
+#pragma warning restore CA2100 // Review SQL queries for security vulnerabilities
 #pragma warning restore CA1416 // Validate platform compatibility
 	}
 }
