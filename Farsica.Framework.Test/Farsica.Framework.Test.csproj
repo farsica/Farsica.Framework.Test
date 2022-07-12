@@ -8,6 +8,7 @@
         <Authors>Fariborz Khosravi</Authors>
         <Company>Farsica</Company>
         <RepositoryUrl>https://github.com/farsica/Farsica.Template.Test</RepositoryUrl>
+        <Version>1.0.0</Version>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
