@@ -6,7 +6,7 @@ namespace Farsica.Framework.Test.Data
 	[AttributeUsage(AttributeTargets.Method)]
 	public class TestCaseAttribute : Attribute, ITraitAttribute
 	{
-		public string TestCase { get; set; }
+		public string TestCase { get; }
 
 		public TestCaseAttribute(string testCase)
 		{

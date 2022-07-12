@@ -20,7 +20,7 @@ namespace Farsica.Framework.Test.Logger
 
 		public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
 		{
-			testOutputHelper.WriteLine($"{categoryName} [{eventId}] {formatter(state, exception)}");
+			testOutputHelper.WriteLine($"{categoryName} [{eventId}] {(formatter is not null ? formatter(state, exception) : string.Empty)}");
 			if (exception != null)
 			{
 				testOutputHelper.WriteLine(exception.ToString());

@@ -1,16 +1,17 @@
-﻿using Xunit.Abstractions;
+﻿using System.Diagnostics.CodeAnalysis;
+using Xunit.Abstractions;
 using Xunit.Sdk;
 
 namespace Farsica.Framework.Test.Data
 {
 	public class TestPriorityOrderer : ITestCaseOrderer
 	{
-		public IEnumerable<TTestCase> OrderTestCases<TTestCase>(
-			IEnumerable<TTestCase> testCases) where TTestCase : ITestCase
+		public IEnumerable<TTestCase> OrderTestCases<TTestCase>([NotNull] IEnumerable<TTestCase> testCases)
+			where TTestCase : ITestCase
 		{
 			string assemblyName = typeof(TestPriorityAttribute).AssemblyQualifiedName!;
 			var sortedMethods = new SortedDictionary<int, List<TTestCase>>();
-			foreach (TTestCase testCase in testCases)
+			foreach (var testCase in testCases)
 			{
 				int priority = testCase.TestMethod.Method.GetCustomAttributes(assemblyName).FirstOrDefault()?.GetNamedArgument<int>(nameof(TestPriorityAttribute.Priority)) ?? 0;
 
@@ -27,7 +28,7 @@ namespace Farsica.Framework.Test.Data
 			where TKey : struct
 			where TValue : new()
 		{
-			return dictionary.TryGetValue(key, out TValue result)
+			return dictionary.TryGetValue(key, out var result)
 				? result
 				: (dictionary[key] = new TValue());
 		}

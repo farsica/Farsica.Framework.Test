@@ -11,5 +11,5 @@ public class SessionSettings
     public uint DefaultTimeoutSeconds { get; set; }
     public string? UserName { get; set; }
     public string? Password { get; set; }
-    public string? ApplicationUrl { get; set; }
+    public Uri? ApplicationUrl { get; set; }
 }

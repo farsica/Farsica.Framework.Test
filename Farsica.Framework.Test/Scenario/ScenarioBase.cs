@@ -1,11 +1,7 @@
 ﻿using Farsica.Framework.Test.Core;
 using Farsica.Framework.Test.Data;
-using Farsica.Framework.Test.Logger;
-using Microsoft.Extensions.Logging;
 using OpenQA.Selenium;
 using Xunit;
-using Xunit.Abstractions;
-using Xunit.Sdk;
 
 namespace Farsica.Framework.Test.Scenario
 {
@@ -21,7 +17,7 @@ namespace Farsica.Framework.Test.Scenario
 		protected bool IsDisposed { get; set; }
 
 		//public ScenarioBase(ITestOutputHelper testOutputHelper)
-		public ScenarioBase()
+		protected ScenarioBase()
 		{
 			UiTestSession.Current.Start();
 			Driver = UiTestSession.Current.Resolve<IWebDriver>();
@@ -47,7 +43,7 @@ namespace Farsica.Framework.Test.Scenario
 			return new TNestedAction { Driver = Driver };
 		}
 
-		public TData GetNestedData<TGenerator, TData>()
+		public TData? GetNestedData<TGenerator, TData>()
 			where TGenerator : ITestDataGenerator<TData>, new()
 			where TData : IData, new()
 		{
@@ -80,9 +76,9 @@ namespace Farsica.Framework.Test.Scenario
 			if (!IsDisposed && disposing && Driver != null)
 			{
 				UiTestSession.Current.CleanUp();
-				Driver?.Close();
-				Driver?.Quit();
-				Driver?.Dispose();
+				Driver.Close();
+				Driver.Quit();
+				Driver.Dispose();
 			}
 
 			IsDisposed = true;
