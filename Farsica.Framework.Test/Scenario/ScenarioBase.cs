@@ -45,7 +45,7 @@ namespace Farsica.Framework.Test.Scenario
 
 		public TData? GetNestedData<TGenerator, TData>()
 			where TGenerator : ITestDataGenerator<TData>, new()
-			where TData : IData, new()
+			where TData : BaseData
 		{
 			return new TGenerator().GetData().FirstOrDefault();
 		}
