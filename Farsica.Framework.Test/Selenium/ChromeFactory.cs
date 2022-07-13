@@ -15,7 +15,8 @@ public class ChromeFactory : INamedBrowserFactory
     public IWebDriver Create()
     {
 #pragma warning disable CA2000 // Dispose objects before losing scope
-		var driverService = ChromeDriverService.CreateDefaultService($"{Environment.CurrentDirectory}\\Drivers");
+		//var driverService = ChromeDriverService.CreateDefaultService($"{Environment.CurrentDirectory}\\Drivers");
+		var driverService = ChromeDriverService.CreateDefaultService($"{Environment.CurrentDirectory}");
 #pragma warning restore CA2000 // Dispose objects before losing scope
 		var options = new ChromeOptions();
         if (this.options.Headless)
