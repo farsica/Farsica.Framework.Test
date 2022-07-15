@@ -10,7 +10,7 @@ namespace Farsica.Framework.Test.Scenario
 		where TScenario : ScenarioBase<TScenario, TAction>, new()
 		where TAction : Action.ActionBase, new()
 	{
-		protected IWebDriver? Driver { get; private set; }
+		protected WebDriver? Driver { get; private set; }
 		protected TAction? Action { get; private set; }
 		//protected ILogger<TScenario>? Logger { get; private set; }
 
@@ -20,14 +20,15 @@ namespace Farsica.Framework.Test.Scenario
 		protected ScenarioBase()
 		{
 			UiTestSession.Current.Start();
-			Driver = UiTestSession.Current.Resolve<IWebDriver>();
+			Driver = UiTestSession.Current.Resolve<WebDriver>();
 			var url = UiTestSession.Current.Settings.ApplicationUrl;
 			Driver?.Navigate().GoToUrl(url);
 			Driver?.Manage().Timeouts().PageLoad.Add(TimeSpan.FromSeconds(60));
 
 			Action = new TAction
 			{
-				Driver = Driver
+				Driver = Driver,
+				Settings = UiTestSession.Current.Settings,
 			};
 
 			//var loggerFactory = LoggerFactory.Create(l =>

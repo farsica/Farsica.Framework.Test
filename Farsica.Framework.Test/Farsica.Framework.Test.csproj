@@ -6,7 +6,7 @@
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
         <Authors>Fariborz Khosravi</Authors>
         <Company>Farsica</Company>
-        <Version>1.0.2</Version>
+        <Version>1.0.3</Version>
 		<Description>Asp.net Test Framework</Description>
 		<RepositoryUrl>https://github.com/farsica/Farsica.Framework.Test</RepositoryUrl>
 		<RepositoryType>public</RepositoryType>
@@ -31,13 +31,17 @@
       <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
       <PackageReference Include="Selenium.Support" Version="4.3.0" />
       <PackageReference Include="Selenium.WebDriver" Version="4.3.0" />
-      <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="103.0.5060.5300" />
-      <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.31.0.1" />
       <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
       <PackageReference Include="System.Data.OleDb" Version="6.0.0" />
       <PackageReference Include="xunit.extensibility.core" Version="2.4.1" />
       <PackageReference Include="xunit.extensibility.execution" Version="2.4.1" />
-      <!--<PackageReference Include="xunit" Version="2.4.1" />-->
     </ItemGroup>
+
+	<ItemGroup>
+		<Content Include="Drivers\*.*">
+			<PackageCopyToOutput>true</PackageCopyToOutput>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 
 </Project>

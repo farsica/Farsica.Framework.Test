@@ -12,11 +12,10 @@ public class ChromeFactory : INamedBrowserFactory
         this.options = options;
     }
 
-    public IWebDriver Create()
+    public WebDriver Create()
     {
 #pragma warning disable CA2000 // Dispose objects before losing scope
-		//var driverService = ChromeDriverService.CreateDefaultService($"{Environment.CurrentDirectory}\\Drivers");
-		var driverService = ChromeDriverService.CreateDefaultService($"{Environment.CurrentDirectory}");
+		var driverService = ChromeDriverService.CreateDefaultService($"{Environment.CurrentDirectory}\\Drivers");
 #pragma warning restore CA2000 // Dispose objects before losing scope
 		var options = new ChromeOptions();
         if (this.options.Headless)

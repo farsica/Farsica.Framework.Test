@@ -12,4 +12,5 @@ public class SessionSettings
     public string? UserName { get; set; }
     public string? Password { get; set; }
     public Uri? ApplicationUrl { get; set; }
+    public string? ScreenshotsDirectory { get; set; }
 }

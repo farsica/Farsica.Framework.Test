@@ -3,7 +3,7 @@ using OpenQA.Selenium;
 
 namespace Farsica.Framework.Test.Core;
 
-public interface INamedBrowserFactory : IFactory<IWebDriver>
+public interface INamedBrowserFactory : IFactory<WebDriver>
 {
     BrowserType BrowserType { get; }
 }

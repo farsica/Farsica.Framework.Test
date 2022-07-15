@@ -16,7 +16,7 @@ public class WebDriverFactory
         driverOptions = this.serviceProvider.GetRequiredService<SessionSettings>();
     }
 
-    public IWebDriver Create()
+    public WebDriver Create()
     {
         var factory = serviceProvider.GetServices<INamedBrowserFactory>().FirstOrDefault(t => t.BrowserType == driverOptions.BrowserType);
         if (factory is null)
