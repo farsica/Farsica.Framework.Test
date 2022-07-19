@@ -102,6 +102,17 @@ namespace Farsica.Framework.Test.Action
 			return true;
 		}
 
+		protected string? GetAttribute(By by, string? attribute, int waitSeconds = DefaultWaitSeconds)
+		{
+			var element = FindElement(by, waitSeconds);
+			if (element is null)
+			{
+				return null;
+			}
+
+			return element.GetAttribute(attribute);
+		}
+
 		protected bool GoTo([NotNull] Uri uri)
 		{
 			if (Driver is null)
@@ -128,6 +139,11 @@ namespace Farsica.Framework.Test.Action
 			element.SendKeys(value);
 
 			return true;
+		}
+
+		protected string? GetInputValue(By by, int waitSeconds = DefaultWaitSeconds)
+		{
+			return GetAttribute(by, "value", waitSeconds);
 		}
 
 		protected bool SetDropDownByValue(By by, string? value, int waitSeconds = DefaultWaitSeconds)
