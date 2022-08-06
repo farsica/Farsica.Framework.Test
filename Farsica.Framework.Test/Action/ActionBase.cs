@@ -1,13 +1,16 @@
 ﻿using Farsica.Framework.Test.Common;
+using Farsica.Framework.Test.Selenium;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System.Diagnostics.CodeAnalysis;
+using static Farsica.Framework.Test.Common.Constants;
 
 namespace Farsica.Framework.Test.Action
 {
 	public abstract class ActionBase
 	{
 		private const int DefaultWaitSeconds = 60;
+		private readonly By BodyElement = By.TagName("body");
 
 		internal WebDriver? Driver { get; set; }
 		internal SessionSettings? Settings { get; set; }
@@ -93,7 +96,7 @@ namespace Farsica.Framework.Test.Action
 		{
 			string script = "arguments[0].setAttribute(arguments[1], arguments[2])";
 			var element = FindElement(by, waitSeconds);
-			if(element is null)
+			if (element is null)
 			{
 				return false;
 			}
@@ -171,6 +174,44 @@ namespace Farsica.Framework.Test.Action
 			var dropdown = new SelectElement(element);
 			dropdown.SelectByText(text);
 
+			return true;
+		}
+
+		protected bool FocusOnElement(By by, int waitSeconds = DefaultWaitSeconds)
+		{
+			string script = "arguments[0].click()";
+			var element = FindElement(by, waitSeconds);
+			if (element is null)
+			{
+				return false;
+			}
+
+			(Driver as IJavaScriptExecutor)?.ExecuteScript(script, element);
+			return true;
+		}
+
+		protected bool ToggleCheckbox(By by, int waitSeconds = DefaultWaitSeconds)
+		{
+			string script = "arguments[0].click()";
+			var element = FindElement(by, waitSeconds);
+			if (element is null)
+			{
+				return false;
+			}
+
+			(Driver as IJavaScriptExecutor)?.ExecuteScript(script, element);
+			return true;
+		}
+
+		protected bool SendKeys(Key key, By? by = null, int waitSeconds = DefaultWaitSeconds)
+		{
+			var element = FindElement(by ?? BodyElement, waitSeconds);
+			if (element is null)
+			{
+				return false;
+			}
+
+			element.SendKeys(Converter.Convert(key));
 			return true;
 		}
 	}

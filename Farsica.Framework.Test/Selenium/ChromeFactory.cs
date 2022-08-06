@@ -1,6 +1,7 @@
 ﻿using Farsica.Framework.Test.Common;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using static Farsica.Framework.Test.Common.Constants;
 
 namespace Farsica.Framework.Test.Core.Selenium;
 

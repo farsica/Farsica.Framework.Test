@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using static Farsica.Framework.Test.Common.Constants;
 
 namespace Farsica.Framework.Test.Common;
 

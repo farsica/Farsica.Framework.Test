@@ -1,5 +1,6 @@
 ﻿using Farsica.Framework.Test.Common;
 using OpenQA.Selenium;
+using static Farsica.Framework.Test.Common.Constants;
 
 namespace Farsica.Framework.Test.Core;
 
