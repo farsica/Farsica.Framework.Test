@@ -73,8 +73,18 @@ namespace Farsica.Framework.Test.Action
 
 		protected string? TakeScreenshot()
 		{
+			if (string.IsNullOrEmpty(Settings?.ScreenshotsDirectory))
+			{
+				return null;
+			}
+
+			var path = Path.IsPathFullyQualified(Settings.ScreenshotsDirectory) ? Settings.ScreenshotsDirectory : $"{Environment.CurrentDirectory}\\{Settings.ScreenshotsDirectory}";
+			if (path.EndsWith("\\") is false)
+			{
+				path += "\\";
+			}
 			var now = DateTime.Now;
-			var filePath = $"{Settings?.ScreenshotsDirectory}{now:yyyy-MM-dd-HH-mm-}{now.Ticks}.jpg";
+			var filePath = $"{path}{now:yyyyMMddHHmm-}{now.Ticks}.jpg";
 			Driver?.GetScreenshot()?.SaveAsFile(filePath, ScreenshotImageFormat.Jpeg);
 
 			return filePath;

@@ -39,5 +39,5 @@ public class IEFactory : INamedBrowserFactory
 		return driver;
 	}
 
-	public BrowserType BrowserType => BrowserType.Firefox;
+	public BrowserType BrowserType => BrowserType.IE;
 }

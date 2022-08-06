@@ -39,5 +39,5 @@ public class SafariFactory : INamedBrowserFactory
 		return driver;
 	}
 
-	public BrowserType BrowserType => BrowserType.Firefox;
+	public BrowserType BrowserType => BrowserType.Safari;
 }
