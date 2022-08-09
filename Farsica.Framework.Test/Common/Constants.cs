@@ -2,6 +2,8 @@
 {
 	public static class Constants
 	{
+		public const string DefaultScreenshotsDirectory = "Screenshots";
+
 		public enum BrowserType
 		{
 			None,

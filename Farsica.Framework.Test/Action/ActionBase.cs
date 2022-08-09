@@ -78,12 +78,17 @@ namespace Farsica.Framework.Test.Action
 
 		protected string? TakeScreenshot()
 		{
-			if (string.IsNullOrEmpty(Settings?.ScreenshotsDirectory))
+			var path = Settings?.ScreenshotsDirectory;
+			if (string.IsNullOrEmpty(path))
 			{
-				return null;
+				return path = DefaultScreenshotsDirectory;
 			}
 
-			var path = Path.IsPathFullyQualified(Settings.ScreenshotsDirectory) ? Settings.ScreenshotsDirectory : $"{Environment.CurrentDirectory}\\{Settings.ScreenshotsDirectory}";
+			if (Path.IsPathFullyQualified(path) is false)
+			{
+				path = Path.Combine(Environment.CurrentDirectory, path);
+			}
+
 			if (path.EndsWith("\\") is false)
 			{
 				path += "\\";

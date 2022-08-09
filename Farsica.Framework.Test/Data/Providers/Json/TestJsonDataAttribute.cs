@@ -28,9 +28,9 @@ namespace Farsica.Framework.Test.Data.Providers.Json
 				throw new ArgumentNullException(nameof(testMethod));
 			}
 
-			var path = Path.IsPathRooted(filePath)
+			var path = Path.IsPathFullyQualified(filePath)
 				? filePath
-				: Path.GetRelativePath(Environment.CurrentDirectory, filePath);
+				: Path.Combine(Environment.CurrentDirectory, filePath);
 
 			if (!File.Exists(path))
 			{
