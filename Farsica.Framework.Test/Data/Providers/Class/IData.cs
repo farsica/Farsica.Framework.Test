@@ -1,4 +1,4 @@
-﻿namespace Farsica.Framework.Test.Data
+﻿namespace Farsica.Framework.Test.Data.Providers.Class
 {
 #pragma warning disable CA1040 // Avoid empty interfaces
 	public interface IData

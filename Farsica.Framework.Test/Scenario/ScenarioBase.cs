@@ -1,5 +1,5 @@
 ﻿using Farsica.Framework.Test.Core;
-using Farsica.Framework.Test.Data;
+using Farsica.Framework.Test.Data.Providers.Class;
 using OpenQA.Selenium;
 using Xunit;
 

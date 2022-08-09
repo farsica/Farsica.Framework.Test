@@ -3,7 +3,7 @@ using System.Data;
 using System.Data.OleDb;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Farsica.Framework.Test.Data
+namespace Farsica.Framework.Test.Data.Providers.Sql
 {
 	[AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
 	public class OleDbDataAttribute : DataAdapterDataAttribute

@@ -2,14 +2,14 @@
 using System.Reflection;
 using Xunit.Sdk;
 
-namespace Farsica.Framework.Test.Data
+namespace Farsica.Framework.Test.Data.Providers.Sql
 {
-	[DataDiscoverer("Farsica.Framework.Test.Data.DataAdapterDataAttributeDiscoverer", "Farsica.Framework.Test")]
+	[DataDiscoverer("Farsica.Framework.Test.Data.Providers.Sql.DataAdapterDataAttributeDiscoverer", "Farsica.Framework.Test")]
 	public abstract class DataAdapterDataAttribute : DataAttribute
 	{
 		protected abstract IDataAdapter DataAdapter { get; }
 
-		public bool EnableDiscoveryEnumeration { get; set; }
+		public bool DisableDiscoveryEnumeration { get; set; }
 
 		public override IEnumerable<object?[]> GetData(MethodInfo methodUnderTest)
 		{

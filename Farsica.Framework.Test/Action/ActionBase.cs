@@ -2,6 +2,7 @@
 using Farsica.Framework.Test.Selenium;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 using System.Diagnostics.CodeAnalysis;
 using static Farsica.Framework.Test.Common.Constants;
 
@@ -17,7 +18,11 @@ namespace Farsica.Framework.Test.Action
 
 		protected bool WaitForElementReady(By by, int waitSeconds = DefaultWaitSeconds)
 		{
-			var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(waitSeconds));
+			WebDriverWait wait = new(Driver, TimeSpan.FromSeconds(waitSeconds));
+			wait.Until(ExpectedConditions.ElementExists(by));
+			wait.Until(ExpectedConditions.ElementIsVisible(by));
+			wait.Until(ExpectedConditions.ElementToBeClickable(by));
+
 			return wait.Until((d) => d.FindElement(by)?.Displayed ?? false);
 		}
 
@@ -83,6 +88,11 @@ namespace Farsica.Framework.Test.Action
 			{
 				path += "\\";
 			}
+			if (Directory.Exists(path) is false)
+			{
+				Directory.CreateDirectory(path);
+			}
+
 			var now = DateTime.Now;
 			var filePath = $"{path}{now:yyyyMMddHHmm-}{now.Ticks}.jpg";
 			Driver?.GetScreenshot()?.SaveAsFile(filePath, ScreenshotImageFormat.Jpeg);

@@ -1,10 +1,10 @@
-﻿namespace Farsica.Framework.Test.Data
+﻿namespace Farsica.Framework.Test.Data.Providers.Sql
 {
 	[AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-	public class SqlServerDataAttribute : OleDbDataAttribute
+	public class TestSqlDataAttribute : OleDbDataAttribute
 	{
 #pragma warning disable CA1019 // Define accessors for attribute arguments
-		public SqlServerDataAttribute(string selectStatement)
+		public TestSqlDataAttribute(string selectStatement)
 #pragma warning restore CA1019 // Define accessors for attribute arguments
 			: base(selectStatement)
 		{
