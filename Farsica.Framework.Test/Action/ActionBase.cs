@@ -16,16 +16,6 @@ namespace Farsica.Framework.Test.Action
 		internal WebDriver? Driver { get; set; }
 		internal SessionSettings? Settings { get; set; }
 
-		protected bool WaitForElementReady(By by, int waitSeconds = DefaultWaitSeconds)
-		{
-			WebDriverWait wait = new(Driver, TimeSpan.FromSeconds(waitSeconds));
-			wait.Until(ExpectedConditions.ElementExists(by));
-			wait.Until(ExpectedConditions.ElementIsVisible(by));
-			wait.Until(ExpectedConditions.ElementToBeClickable(by));
-
-			return wait.Until((d) => d.FindElement(by)?.Displayed ?? false);
-		}
-
 		protected IWebElement? FindElement(By by, int waitSeconds = DefaultWaitSeconds)
 		{
 			if (Driver is null)
@@ -33,13 +23,12 @@ namespace Farsica.Framework.Test.Action
 				return null;
 			}
 
-			var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(waitSeconds));
+			WebDriverWait wait = new(Driver, TimeSpan.FromSeconds(waitSeconds));
 			wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
-			return wait.Until(driver =>
-			{
-				var element = driver.FindElement(by);
-				return element.Displayed ? element : null;
-			});
+			wait.Until(ExpectedConditions.ElementExists(by));
+			wait.Until(ExpectedConditions.ElementIsVisible(by));
+
+			return wait.Until(ExpectedConditions.ElementToBeClickable(by));
 		}
 
 		protected IReadOnlyCollection<IWebElement>? FindElements(By by, int waitSeconds = DefaultWaitSeconds)
