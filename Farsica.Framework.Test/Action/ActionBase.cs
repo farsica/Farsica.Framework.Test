@@ -18,17 +18,24 @@ namespace Farsica.Framework.Test.Action
 
 		protected IWebElement? FindElement(By by, int waitSeconds = DefaultWaitSeconds)
 		{
-			if (Driver is null)
+			try
+			{
+				if (Driver is null)
+				{
+					return null;
+				}
+
+				WebDriverWait wait = new(Driver, TimeSpan.FromSeconds(waitSeconds));
+				wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
+				wait.Until(ExpectedConditions.ElementExists(by));
+				wait.Until(ExpectedConditions.ElementIsVisible(by));
+
+				return wait.Until(ExpectedConditions.ElementToBeClickable(by));
+			}
+			catch (NoSuchElementException)
 			{
 				return null;
 			}
-
-			WebDriverWait wait = new(Driver, TimeSpan.FromSeconds(waitSeconds));
-			wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
-			wait.Until(ExpectedConditions.ElementExists(by));
-			wait.Until(ExpectedConditions.ElementIsVisible(by));
-
-			return wait.Until(ExpectedConditions.ElementToBeClickable(by));
 		}
 
 		protected IReadOnlyCollection<IWebElement>? FindElements(By by, int waitSeconds = DefaultWaitSeconds)
@@ -200,7 +207,7 @@ namespace Farsica.Framework.Test.Action
 				return false;
 			}
 
-			(Driver as IJavaScriptExecutor)?.ExecuteScript(script, element);
+			Driver?.ExecuteScript(script, element);
 			return true;
 		}
 
@@ -213,7 +220,7 @@ namespace Farsica.Framework.Test.Action
 				return false;
 			}
 
-			(Driver as IJavaScriptExecutor)?.ExecuteScript(script, element);
+			Driver?.ExecuteScript(script, element);
 			return true;
 		}
 
@@ -226,6 +233,19 @@ namespace Farsica.Framework.Test.Action
 			}
 
 			element.SendKeys(Converter.Convert(key));
+			return true;
+		}
+
+		protected bool ScrollToElement(By by, int waitSeconds = DefaultWaitSeconds)
+		{
+			string script = "arguments[0].scrollIntoView(true)";
+			var element = FindElement(by, waitSeconds);
+			if (element is null)
+			{
+				return false;
+			}
+
+			Driver?.ExecuteScript(script, element);
 			return true;
 		}
 	}
