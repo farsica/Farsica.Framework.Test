@@ -36,6 +36,15 @@ namespace Farsica.Framework.Test.Action
 			{
 				return null;
 			}
+			catch (WebDriverTimeoutException exc)
+			{
+				if (exc.InnerException is NoSuchElementException)
+				{
+					return null;
+				}
+
+				throw;
+			}
 		}
 
 		protected IReadOnlyCollection<IWebElement>? FindElements(By by, int waitSeconds = DefaultWaitSeconds)
