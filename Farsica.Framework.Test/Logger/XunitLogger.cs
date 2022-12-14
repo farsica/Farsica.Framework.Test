@@ -6,7 +6,7 @@ namespace Farsica.Framework.Test.Logger
 	public class XunitLogger : ILogger
 	{
 		private readonly ITestOutputHelper testOutputHelper;
-		private readonly string categoryName;
+		private readonly string? categoryName;
 
 		public XunitLogger(ITestOutputHelper testOutputHelper, string categoryName)
 		{
@@ -14,7 +14,7 @@ namespace Farsica.Framework.Test.Logger
 			this.categoryName = categoryName;
 		}
 
-		public IDisposable BeginScope<TState>(TState state) => NoopDisposable.Instance;
+		public IDisposable? BeginScope<TState>(TState state) where TState : notnull => NoopDisposable.Instance;
 
 		public bool IsEnabled(LogLevel logLevel) => true;
 

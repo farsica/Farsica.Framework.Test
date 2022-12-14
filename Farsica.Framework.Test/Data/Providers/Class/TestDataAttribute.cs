@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Reflection;
+﻿using System.Reflection;
 using Xunit;
 using Xunit.Sdk;
 
@@ -8,12 +6,13 @@ namespace Farsica.Framework.Test.Data.Providers.Class
 {
 	[DataDiscoverer("Farsica.Framework.Test.Data.Providers.Class.TestDataDiscoverer", "Farsica.Framework.Test")]
 	[AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-	public sealed class TestDataAttribute : MemberDataAttributeBase
+	public sealed class TestDataAttribute<T> : MemberDataAttributeBase
+		where T : ITestDataGenerator<IData>
 	{
-		public TestDataAttribute(Type memberType)
+		public TestDataAttribute()
 			: base(nameof(ITestDataGenerator<IData>.GetData), null)
 		{
-			MemberType = memberType;
+			MemberType = typeof(T);
 		}
 
 		protected override object[]? ConvertDataItem(MethodInfo? testMethod, object? item)

@@ -25,7 +25,9 @@ public class ChromeFactory : INamedBrowserFactory
         }
         options.AddArgument("--no-sandbox");
         options.AddArgument("--start-maximized");
-        options.AddUserProfilePreference("download.default_directory", this.options.DownloadDirectory);
+		options.AddArgument("--whitelisted-ips=\"\"");
+
+		options.AddUserProfilePreference("download.default_directory", this.options.DownloadDirectory);
         options.AddUserProfilePreference("profile.cookie_controls_mode", 0);
         options.SetLoggingPreference(LogType.Browser, LogLevel.All);
 

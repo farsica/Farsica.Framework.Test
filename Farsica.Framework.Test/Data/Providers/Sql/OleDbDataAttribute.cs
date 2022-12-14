@@ -8,8 +8,8 @@ namespace Farsica.Framework.Test.Data.Providers.Sql
 	[AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
 	public class OleDbDataAttribute : DataAdapterDataAttribute
 	{
-		private readonly string connectionString;
-		private readonly string selectStatement;
+		private readonly string? connectionString;
+		private readonly string? selectStatement;
 
 #pragma warning disable CA1019 // Define accessors for attribute arguments
 		public OleDbDataAttribute([NotNull] string selectStatement)

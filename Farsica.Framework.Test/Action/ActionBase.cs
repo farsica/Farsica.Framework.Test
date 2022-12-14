@@ -16,7 +16,7 @@ namespace Farsica.Framework.Test.Action
 		internal WebDriver? Driver { get; set; }
 		internal SessionSettings? Settings { get; set; }
 
-		protected IWebElement? FindElement(By by, int waitSeconds = DefaultWaitSeconds)
+		protected IWebElement? FindElement(By by, int waitSeconds = DefaultWaitSeconds, bool ignoreIsVisible = true)
 		{
 			try
 			{
@@ -27,10 +27,17 @@ namespace Farsica.Framework.Test.Action
 
 				WebDriverWait wait = new(Driver, TimeSpan.FromSeconds(waitSeconds));
 				wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
-				wait.Until(ExpectedConditions.ElementExists(by));
-				wait.Until(ExpectedConditions.ElementIsVisible(by));
 
-				return wait.Until(ExpectedConditions.ElementToBeClickable(by));
+				if (ignoreIsVisible)
+				{
+					wait.Until(ExpectedConditions.ElementExists(by));
+					wait.Until(ExpectedConditions.ElementIsVisible(by));
+					return wait.Until(ExpectedConditions.ElementToBeClickable(by));
+				}
+				else
+				{
+					return wait.Until(ExpectedConditions.ElementExists(by));
+				}
 			}
 			catch (NoSuchElementException)
 			{
