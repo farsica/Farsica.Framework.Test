@@ -6,7 +6,7 @@
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
         <Authors>Fariborz Khosravi</Authors>
         <Company>Farsica</Company>
-        <Version>1.2.0</Version>
+        <Version>1.2.1</Version>
 		<Description>Asp.net Test Framework</Description>
 		<RepositoryUrl>https://github.com/farsica/Farsica.Framework.Test</RepositoryUrl>
 		<RepositoryType>public</RepositoryType>
