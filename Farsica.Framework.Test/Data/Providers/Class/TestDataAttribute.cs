@@ -6,13 +6,12 @@ namespace Farsica.Framework.Test.Data.Providers.Class
 {
 	[DataDiscoverer("Farsica.Framework.Test.Data.Providers.Class.TestDataDiscoverer", "Farsica.Framework.Test")]
 	[AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-	public sealed class TestDataAttribute<T> : MemberDataAttributeBase
-		where T : ITestDataGenerator<IData>
+	public sealed class TestDataAttribute : MemberDataAttributeBase
 	{
-		public TestDataAttribute()
+		public TestDataAttribute(Type memberType)
 			: base(nameof(ITestDataGenerator<IData>.GetData), null)
 		{
-			MemberType = typeof(T);
+			MemberType = memberType;
 		}
 
 		protected override object[]? ConvertDataItem(MethodInfo? testMethod, object? item)
